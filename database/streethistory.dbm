@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.7.0-alpha">
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<database name="db_streethistory">
+	<appended-sql><![CDATA[CREATE EXTENSION postgis;		
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION postgis_tiger_geocoder;]]></appended-sql>
+</database>
+
+<table name="photo">
+	<schema name="public"/>
+	<position x="344" y="219"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="extract">
+		<type name="char" length="250"/>
+	</column>
+	<column name="description">
+		<type name="text"/>
+	</column>
+	<column name="ubication">
+		<type name="point"/>
+	</column>
+	<column name="Date">
+		<type name="date"/>
+	</column>
+	<constraint name="pk_photo_id" type="pk-constr" factor="10" table="public.photo">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tag">
+	<schema name="public"/>
+	<position x="630" y="243"/>
+	<column name="tag" not-null="true">
+		<type name="varchar" length="25"/>
+	</column>
+	<constraint name="pk_tag" type="pk-constr" factor="10" table="public.tag">
+		<columns names="tag" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="scene">
+	<schema name="public"/>
+	<position x="343" y="371"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="description">
+		<type name="text"/>
+	</column>
+	<constraint name="pk_scene_id" type="pk-constr" factor="10" table="public.scene">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="many_scene_has_many_photo" type="relnn"
+	 src-col-pattern="{sc}_{st}" dst-col-pattern="{sc}_{dt}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 src-table="public.scene"
+	 dst-table="public.photo"
+	 src-required="false" dst-required="false"	 table-name="many_scene_has_many_photo"/>
+
+<relationship name="many_photo_has_many_tag" type="relnn"
+	 src-col-pattern="{sc}_{st}" dst-col-pattern="{sc}_{dt}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 src-table="public.photo"
+	 dst-table="public.tag"
+	 src-required="false" dst-required="false"	 table-name="many_photo_has_many_tag"/>
+
+<relationship name="many_scene_has_many_tag" type="relnn"
+	 src-col-pattern="{sc}_{st}" dst-col-pattern="{sc}_{dt}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 src-table="public.scene"
+	 dst-table="public.tag"
+	 src-required="false" dst-required="false"	 table-name="many_scene_has_many_tag"/>
+
+</dbmodel>

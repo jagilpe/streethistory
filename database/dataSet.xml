@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <photo id="1" title="Photo" extract="Photo extract                                                                                                                                                                                                                                             " description="Photo description" date="2010-10-20" url="http://localhost/images/img.jpg"/>
+  <tag tag="Tag"/>
+  <many_photo_has_many_tag id_photo="1" tag_tag="Tag"/>
+  <scene id="1" title="Scene" description="Scene description"/>
+  <many_scene_has_many_photo id_scene="1" id_photo="1"/>
+  <many_scene_has_many_tag id_scene="1" tag_tag="Tag"/>
+</dataset>

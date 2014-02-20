@@ -15,9 +15,9 @@ SET check_function_bodies = false;
 -- CREATE DATABASE db_streethistory
 -- ;
 -- -- Appended SQL commands --
--- CREATE EXTENSION postgis;		
--- CREATE EXTENSION fuzzystrmatch;
--- CREATE EXTENSION postgis_tiger_geocoder;
+CREATE EXTENSION IF NOT EXISTS postgis;		
+-- CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+-- CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
 -- -- ddl-end --
 -- 
 
@@ -28,8 +28,9 @@ CREATE TABLE public.photo(
 	title varchar(100) NOT NULL,
 	extract char(250),
 	description text,
-	ubication point,
-	"Date" date,
+	location geometry(POINT, 4326),
+	date date,
+	url varchar(250),
 	CONSTRAINT pk_photo_id PRIMARY KEY (id)
 
 );
@@ -48,6 +49,7 @@ CREATE TABLE public.scene(
 	id serial NOT NULL,
 	title varchar(200) NOT NULL,
 	description text,
+	location geometry(POINT, 4326),
 	CONSTRAINT pk_scene_id PRIMARY KEY (id)
 
 );

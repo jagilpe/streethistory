@@ -26,6 +26,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author "Javier Gil Pereda"
  *
@@ -44,6 +46,7 @@ public class Tag implements Serializable {
 	/**
 	 * @return the photos
 	 */
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "many_photo_has_many_tag",
 	joinColumns = @JoinColumn(name = "id_tag"),
@@ -64,6 +67,7 @@ public class Tag implements Serializable {
 	/**
 	 * @return the scenes
 	 */
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "many_scene_has_many_tag",
 	joinColumns = @JoinColumn(name = "tag_tag"),

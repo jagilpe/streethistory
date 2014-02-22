@@ -32,6 +32,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -65,6 +66,7 @@ public class Photo implements Serializable {
 	/**
 	 * @return the tags
 	 */
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "many_photo_has_many_tag",
 			joinColumns = @JoinColumn(name = "id_photo"),
@@ -83,6 +85,7 @@ public class Photo implements Serializable {
 	/**
 	 * @return the scenes
 	 */
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "many_scene_has_many_photo",
 	joinColumns = @JoinColumn(name = "id_photo"),
@@ -184,6 +187,7 @@ public class Photo implements Serializable {
 	/**
 	 * @return the location
 	 */
+	@JsonIgnore
 	@Type(type = "org.hibernate.spatial.GeometryType")
 	@Column(name = "location", columnDefinition = "org.postgis.PGgeometry")
 	public Point getLocation() {

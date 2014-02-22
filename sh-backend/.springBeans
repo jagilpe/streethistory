@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/datasource.xml</config>
 		<config>src/it/resources/it-app-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/restful-context.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

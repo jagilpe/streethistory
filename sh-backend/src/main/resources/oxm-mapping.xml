@@ -1,0 +1,46 @@
+<mapping>
+	<class name="com.gilpereda.streethistory.domain.Photos">
+		<field name="photos" type="com.gilpereda.streethistory.domain.Photo" collection="arraylist">
+			<bind-xml name="photo" />
+		</field>
+	</class>
+	
+	<class name="com.gilpereda.streethistory.domain.Photo" identity="id">
+		<map-to xml="photo" />
+		
+		<field name="id" type="long">
+			<bind-xml name="id" node="element"/>
+		</field>
+		<field name="title" type="string">
+			<bind-xml name="title" node="element"/>
+		</field>
+		<field name="extract" type="string">
+			<bind-xml name="extract" node="element"/>
+		</field>
+		<field name="description" type="string">
+			<bind-xml name="description" node="element"/>
+		</field>
+		<field name="date" type="string" handler="dateHandler">
+			<bind-xml name="date" node="element"/>
+		</field>
+<!--    		<field name="location" type="com.vividsolutions.jts.geom.Point">
+			<bind-xml name="location" node="element"/>
+		</field> -->
+	</class>
+	
+<!--  	<class name="com.vividsolutions.jts.geom.Point">
+		<map-to xml="location" />
+		
+		<field name="x" type="double">
+			<bind-xml name="latitude" node="element" />
+		</field>
+		<field name="y" type="double">
+			<bind-xml name="longitude" node="element" />
+		</field>
+	</class>   --> 
+	
+	<!-- Date Handler definition for the Joda Time fields-->
+	<field-handler name="dateHandler" class="com.gilpereda.streethistory.xml.handler.DateTimeFieldHandler">
+		<param name="date-format" value="dd.MM.yyyy" />
+	</field-handler>
+</mapping>

@@ -28,6 +28,8 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 /**
+ * Common configuration for the test of the Service Layer integrated tests
+ * 
  * @author "Javier Gil Pereda"
  *
  */

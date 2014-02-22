@@ -23,8 +23,13 @@
 			class="org.apache.commons.dbcp.BasicDataSource"
 			destroy-method="close"
 			p:driverClassName="${dataSource.driverClassName}"
-			p:url="${dataSource.url}"
+			p:url="${dataSource.url}/${dataSource.testDB}"
 			p:username="${dataSource.username}"
 			p:password="${dataSource.password}" />
+		<jdbc:initialize-database data-source="dataSource">
+			<jdbc:script location="classpath:sql/sh_drop_tables.sql" />
+			<jdbc:script location="classpath:sql/sh_create_schema.sql" />
+			<jdbc:script location="classpath:sql/sh_load_test_data.sql" />
+		</jdbc:initialize-database>
 	</beans>
 </beans>

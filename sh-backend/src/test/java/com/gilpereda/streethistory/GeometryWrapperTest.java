@@ -13,33 +13,12 @@
  * See the License for the specific language governing permissions and 
  * limitations under the License.
  */
-package com.gilpereda.streethistory.service;
-
-import java.util.List;
-
-import com.gilpereda.streethistory.domain.Photo;
-import com.vividsolutions.jts.geom.Geometry;
+package com.gilpereda.streethistory;
 
 /**
  * @author "Javier Gil Pereda"
- * 
+ *
  */
-public interface PhotoService {
+public class GeometryWrapperTest {
 
-	public List<Photo> findAll();
-
-	public Photo findById(long id);
-
-	public Photo save(Photo photo);
-
-	public void delete(Photo photo);
-
-	/**
-	 * Finds all the photos which are within the geom object
-	 * 
-	 * @param geom
-	 * @return
-	 */
-	public List<Photo> findByLocation(Geometry geom);
-	
 }

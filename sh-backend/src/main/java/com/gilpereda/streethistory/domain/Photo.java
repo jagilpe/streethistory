@@ -16,7 +16,6 @@
 package com.gilpereda.streethistory.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -27,11 +26,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
-import org.postgis.Point;
+import org.joda.time.DateTime;
+
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * @author "Javier Gil Pereda"
@@ -39,6 +43,10 @@ import org.postgis.Point;
  */
 @Entity
 @Table(name = "photo")
+@NamedQueries({
+	@NamedQuery(name="Photo.findByLocation",
+			query="select p from Photo p where within(p.location, :area)=true")
+})
 public class Photo implements Serializable {
 	
 	// Properties definition
@@ -46,7 +54,7 @@ public class Photo implements Serializable {
 	private String title;
 	private String extract;
 	private String description;
-	private Date date;
+	private DateTime date;
 	private String url;
 	private Point location;
 	// Many to many relationship
@@ -94,7 +102,8 @@ public class Photo implements Serializable {
 	 * @return the id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_id_seq")
+	@SequenceGenerator(name = "photo_id_seq", sequenceName = "photo_id_seq")
 	@Column(name = "id")
 	public long getId() {
 		return id;
@@ -150,13 +159,13 @@ public class Photo implements Serializable {
 	 */
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "date")
-	public Date getDate() {
+	public DateTime getDate() {
 		return date;
 	}
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Date date) {
+	public void setDate(DateTime date) {
 		this.date = date;
 	}
 	/**
@@ -176,7 +185,7 @@ public class Photo implements Serializable {
 	 * @return the location
 	 */
 	@Type(type = "org.hibernate.spatial.GeometryType")
-	@Column(name = "location")
+	@Column(name = "location", columnDefinition = "org.postgis.PGgeometry")
 	public Point getLocation() {
 		return location;
 	}
@@ -185,5 +194,15 @@ public class Photo implements Serializable {
 	 */
 	public void setLocation(Point location) {
 		this.location = location;
+	}
+	
+	public String toString() {
+		return "id: " + getId() +
+				"\ntitle: " + getTitle() +
+				"\nextract: " + getExtract() +
+				"\ndescription: " + getDescription() + 
+				"\ndate: " + getDate() +
+				"\nurl: " + getUrl() +
+				"\nlocation: " + getLocation();
 	}
 }

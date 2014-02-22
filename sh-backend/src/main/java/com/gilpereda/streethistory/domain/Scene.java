@@ -30,7 +30,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
-import org.postgis.Point;
+
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * @author "Javier Gil Pereda"

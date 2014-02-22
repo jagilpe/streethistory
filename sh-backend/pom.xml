@@ -249,6 +249,12 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -343,108 +349,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Setup of the database for test -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.5</version>
-
-				<dependencies>
-					<!-- the dependent jdbc driver -->
-					<dependency>
-						<groupId>org.postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>${postgresql-jdbc-driver-version}</version>
-					</dependency>
-				</dependencies>
-
-				<!-- common configuration shared by all executions -->
-				<configuration>
-					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/sh_test</url>
-					<username>sh_test</username>
-					<password>sh_test</password>
-					<!--all executions are ignored if -Dmaven.test.skip=true -->
-					<skip>${maven.test.skip}</skip>
-				</configuration>
-
-				<executions>
-					<execution>
-						<id>drop-db-before-test-if-any</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<!-- need another database to drop the targeted one -->
-							<url>jdbc:postgresql://localhost:5432/javier</url>
-							<autocommit>true</autocommit>
-							<sqlCommand>drop database if exists sh_test</sqlCommand>
-							<!-- ignore error when database is not avaiable -->
-							<onError>continue</onError>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>create-db</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<url>jdbc:postgresql://localhost:5432/javier</url>
-							<!-- no transaction -->
-							<autocommit>true</autocommit>
-							<sqlCommand>create database sh_test</sqlCommand>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>create-schema</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<autocommit>true</autocommit>
-							<srcFiles>
-								<srcFile>src/main/resources/sql/sh_create_schema.sql</srcFile>
-							</srcFiles>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>create-data</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<orderFile>ascending</orderFile>
-							<fileset>
-								<basedir>${basedir}</basedir>
-								<includes>
-									<include>src/it/resources/sql/sh_load_test_data.sql</include>
-								</includes>
-							</fileset>
-						</configuration>
-					</execution>
-
-					<!-- drop db after test -->
-	 				<execution>
-						<id>drop-db-after-test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<url>jdbc:postgresql://localhost:5432/javier</url>
-							<autocommit>true</autocommit>
-							<sqlCommand>drop database if exists sh_test</sqlCommand>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -463,19 +367,6 @@
 										<goals>
 											<goal>add-test-source</goal>
 											<goal>add-test-resource</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>sql-maven-plugin</artifactId>
-										<versionRange>[1.0,)</versionRange>
-										<goals>
-											<goal>execute</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

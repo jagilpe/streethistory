@@ -17,14 +17,20 @@ package com.gilpereda.streethistory.service.jpa;
 
 import java.util.List;
 
-import org.postgis.PGgeometry;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gilpereda.streethistory.domain.Photo;
-import com.gilpereda.streethistory.domain.Tag;
+import com.gilpereda.streethistory.repository.PhotoRepository;
 import com.gilpereda.streethistory.service.PhotoService;
+import com.google.common.collect.Lists;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * @author "Javier Gil Pereda"
@@ -34,6 +40,12 @@ import com.gilpereda.streethistory.service.PhotoService;
 @Repository
 @Transactional
 public class PhotoServiceImpl implements PhotoService {
+	
+	@PersistenceContext
+	private EntityManager em;
+	
+	@Autowired
+	private PhotoRepository photoRepository;
 
 	/* (non-Javadoc)
 	 * @see com.gilpereda.streethistory.service.PhotoService#findAll()
@@ -41,7 +53,7 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	@Transactional(readOnly=true)
 	public List<Photo> findAll() {
-		return null;
+		return Lists.newArrayList(photoRepository.findAll());
 	}
 
 	/* (non-Javadoc)
@@ -49,8 +61,7 @@ public class PhotoServiceImpl implements PhotoService {
 	 */
 	@Override
 	public Photo findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return photoRepository.findOne(id);
 	}
 
 	/* (non-Javadoc)
@@ -58,8 +69,7 @@ public class PhotoServiceImpl implements PhotoService {
 	 */
 	@Override
 	public Photo save(Photo photo) {
-		// TODO Auto-generated method stub
-		return null;
+		return photoRepository.save(photo);
 	}
 
 	/* (non-Javadoc)
@@ -67,8 +77,7 @@ public class PhotoServiceImpl implements PhotoService {
 	 */
 	@Override
 	public void delete(Photo photo) {
-		// TODO Auto-generated method stub
-
+		photoRepository.delete(photo);
 	}
 
 	/* (non-Javadoc)
@@ -76,19 +85,11 @@ public class PhotoServiceImpl implements PhotoService {
 	 */
 	@Override
 	@Transactional(readOnly=true)
-	public List<Photo> findByLocation(PGgeometry geom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.gilpereda.streethistory.service.PhotoService#findByTags(java.util.List)
-	 */
-	@Override
-	@Transactional(readOnly=true)
-	public List<Photo> findByTags(List<Tag> tags) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Photo> findByLocation(Geometry geom) {
+		TypedQuery<Photo> query = em.createNamedQuery("Photo.findByLocation", Photo.class);
+		query.setParameter("area", geom);
+		List<Photo> photos = query.getResultList();
+		return photos;
 	}
 
 }

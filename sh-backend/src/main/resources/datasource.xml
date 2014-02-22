@@ -35,7 +35,7 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
-		<property name="packagesToScan" value="com.gilpereda.adoj.backend.domain" />
+		<property name="packagesToScan" value="com.gilpereda.streethistory.domain" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisDialect</prop>
@@ -49,7 +49,7 @@
 	</bean>
 	
 	<!-- JPA repository configuration -->
-	<jpa:repositories base-package="com.gilpereda.adoj.backend.repository"
+	<jpa:repositories base-package="com.gilpereda.streethistory.repository"
 		entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="transactionManager" />
 		

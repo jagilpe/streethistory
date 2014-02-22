@@ -16,8 +16,8 @@ SET check_function_bodies = false;
 -- ;
 -- -- Appended SQL commands --
 CREATE EXTENSION IF NOT EXISTS postgis;		
--- CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
--- CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+-- CREATE EXTENSION fuzzystrmatch;
+-- CREATE EXTENSION postgis_tiger_geocoder;
 -- -- ddl-end --
 -- 
 

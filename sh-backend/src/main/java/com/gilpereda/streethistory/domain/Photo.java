@@ -20,6 +20,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,12 +31,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.gilpereda.streethistory.geometry.GeometryHelper;
+import com.gilpereda.streethistory.geometry.SHcoordinates;
 import com.vividsolutions.jts.geom.Point;
 
 /**
@@ -58,6 +62,7 @@ public class Photo implements Serializable {
 	private DateTime date;
 	private String url;
 	private Point location;
+	private SHcoordinates coordinates;
 	// Many to many relationship
 	private Set<Tag> tags;
 	private Set<Scene> scenes;
@@ -66,8 +71,7 @@ public class Photo implements Serializable {
 	/**
 	 * @return the tags
 	 */
-	@JsonIgnore
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "many_photo_has_many_tag",
 			joinColumns = @JoinColumn(name = "id_photo"),
 			inverseJoinColumns = @JoinColumn(name = "tag_tag"))
@@ -86,7 +90,7 @@ public class Photo implements Serializable {
 	 * @return the scenes
 	 */
 	@JsonIgnore
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "many_scene_has_many_photo",
 	joinColumns = @JoinColumn(name = "id_photo"),
 	inverseJoinColumns = @JoinColumn(name = "id_scene"))
@@ -100,6 +104,7 @@ public class Photo implements Serializable {
 	public void setScenes(Set<Scene> scenes) {
 		this.scenes = scenes;
 	}
+	
 	// Getters and Setters
 	/**
 	 * @return the id
@@ -111,12 +116,14 @@ public class Photo implements Serializable {
 	public long getId() {
 		return id;
 	}
+	
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 	/**
 	 * @return the title
 	 */
@@ -125,12 +132,14 @@ public class Photo implements Serializable {
 	public String getTitle() {
 		return title;
 	}
+	
 	/**
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	/**
 	 * @return the extract
 	 */
@@ -138,12 +147,14 @@ public class Photo implements Serializable {
 	public String getExtract() {
 		return extract;
 	}
+	
 	/**
 	 * @param extract the extract to set
 	 */
 	public void setExtract(String extract) {
 		this.extract = extract;
 	}
+	
 	/**
 	 * @return the description
 	 */
@@ -151,12 +162,14 @@ public class Photo implements Serializable {
 	public String getDescription() {
 		return description;
 	}
+	
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	/**
 	 * @return the date
 	 */
@@ -165,12 +178,14 @@ public class Photo implements Serializable {
 	public DateTime getDate() {
 		return date;
 	}
+	
 	/**
 	 * @param date the date to set
 	 */
 	public void setDate(DateTime date) {
 		this.date = date;
 	}
+	
 	/**
 	 * @return the url
 	 */
@@ -178,12 +193,14 @@ public class Photo implements Serializable {
 	public String getUrl() {
 		return url;
 	}
+	
 	/**
 	 * @param url the url to set
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	/**
 	 * @return the location
 	 */
@@ -193,6 +210,7 @@ public class Photo implements Serializable {
 	public Point getLocation() {
 		return location;
 	}
+	
 	/**
 	 * @param location the location to set
 	 */
@@ -200,6 +218,21 @@ public class Photo implements Serializable {
 		this.location = location;
 	}
 	
+	/**
+	 * @return the coordinates
+	 */
+	@Transient
+	public SHcoordinates getCoordinates() {
+		return new SHcoordinates(location.getX(), location.getY());
+	}
+
+	/**
+	 * @param coordinates the coordinates to set
+	 */
+	public void setCoordinates(SHcoordinates coordinates) {
+		this.location = GeometryHelper.getPoint(coordinates.getLatitude(), coordinates.getLongitude());
+	}
+
 	public String toString() {
 		return "id: " + getId() +
 				"\ntitle: " + getTitle() +

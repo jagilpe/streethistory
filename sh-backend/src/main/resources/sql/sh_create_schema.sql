@@ -26,7 +26,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE TABLE public.photo(
 	id serial NOT NULL,
 	title varchar(100) NOT NULL,
-	extract char(250),
+	extract text,
 	description text,
 	location geometry(POINT, 4326),
 	date date,

@@ -23,7 +23,7 @@ CREATE EXTENSION postgis_tiger_geocoder;]]></appended-sql>
 		<type name="varchar" length="100"/>
 	</column>
 	<column name="extract">
-		<type name="char" length="250"/>
+		<type name="text" length="250"/>
 	</column>
 	<column name="description">
 		<type name="text"/>

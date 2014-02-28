@@ -1,6 +1,6 @@
 {
   "name": "sh-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "angular": "1.2.6",
     "json3": "~3.2.6",
@@ -10,7 +10,10 @@
     "angular-resource": "1.2.6",
     "angular-cookies": "1.2.6",
     "angular-sanitize": "1.2.6",
-    "angular-route": "1.2.6"
+    "angular-route": "1.2.6",
+	"angular-bootstrap": "0.10.0",
+	"underscore": "1.5.2",
+	"angular-google-maps": "1.0.13"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

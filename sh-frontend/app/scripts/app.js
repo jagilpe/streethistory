@@ -4,13 +4,21 @@ angular.module('shFrontendApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap',
+  'google-maps',
+	'shFrontend.services.photos'
 ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+				resolve: {
+					photos: ['MultiPhotoLoader', function(MultiPhotoLoader) {
+						return new MultiPhotoLoader();
+					}]
+				}
       })
       .otherwise({
         redirectTo: '/'

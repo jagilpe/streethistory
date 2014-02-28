@@ -1,10 +1,27 @@
 'use strict';
 
 angular.module('shFrontendApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+
+.controller('MainCtrl', ['$scope', 'photos',
+	function($scope, photos) {
+		// map initialization
+		$scope.map = {
+			center: {
+				latitude: 52.5162198,
+				longitude: 13.3776884
+			},
+			zoom: 13,
+			bounds: {},
+			options: {
+				streetViewControl: false,
+				panControl: false,
+				mapTypeControl: false,
+				zoomControl: false
+			}
+		};
+		
+		// Photos data loading
+		$scope.photos = photos;
+	}
+]);
+

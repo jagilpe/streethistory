@@ -22,11 +22,20 @@
 	<!-- Transaction demarcation declaration through annotations -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
+	
+	<!-- Import the volatile DB Connection configuration -->
+	<context:property-placeholder location="classpath:sql/db.properties" />
+	
 	<!-- Data Source declaration -->	
- 	<jee:jndi-lookup id="dataSource"
-		jndi-name="jdbc/StreetHistory"
-		expected-type="javax.sql.DataSource"
-		resource-ref="true" /> 
+	<bean id="dataSource"
+			class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close"
+			p:driverClassName="${dataSource.driverClassName}"
+			p:url="${dataSource.url}/${dataSource.db}"
+			p:username="${dataSource.username}"
+			p:password="${dataSource.password}"
+			p:initialSize="${dataSource.initialConnections}"
+			p:maxActive="${dataSource.maxActiveConnections}"/>
 	
 	<!-- EntityManagerFactory declaration -->
 	<bean id="entityManagerFactory" 

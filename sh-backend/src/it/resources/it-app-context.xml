@@ -22,10 +22,10 @@
 		<bean id="dataSource"
 			class="org.apache.commons.dbcp.BasicDataSource"
 			destroy-method="close"
-			p:driverClassName="${dataSource.driverClassName}"
-			p:url="${dataSource.url}/${dataSource.testDB}"
-			p:username="${dataSource.username}"
-			p:password="${dataSource.password}" />
+			p:driverClassName="${dataSource.itDriverClassName}"
+			p:url="${dataSource.itUrl}/${dataSource.testDB}"
+			p:username="${dataSource.itUsername}"
+			p:password="${dataSource.itPassword}" />
 		<jdbc:initialize-database data-source="dataSource">
 			<jdbc:script location="classpath:sql/sh_drop_tables.sql" />
 			<jdbc:script location="classpath:sql/sh_create_schema.sql" />

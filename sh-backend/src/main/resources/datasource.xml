@@ -51,7 +51,7 @@
 	
 	<beans profile="dev">
 		<!-- Import the volatile DB Connection configuration -->
-	  	<context:property-placeholder location="classpath:sql/db.properties" />
+	  	<context:property-placeholder location="classpath:db.properties" />
 		
 		<!-- Data Source declaration -->	
 		<bean id="dataSource"

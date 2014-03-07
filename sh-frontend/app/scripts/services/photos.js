@@ -2,8 +2,6 @@
 
 angular.module('shFrontend.services.photos', ['ngResource'])
 
-.constant('restfulBaseUrl', 'http://127.0.0.1:8080/streethistory/restful')
-
 .factory('Photo', ['$resource', 'restfulBaseUrl',
 	function($resource, restfulBaseUrl) {
 		return $resource(restfulBaseUrl + '/photo/:id', {

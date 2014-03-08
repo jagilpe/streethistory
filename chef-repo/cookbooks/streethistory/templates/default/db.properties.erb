@@ -1,0 +1,7 @@
+dataSource.driverClassName=org.postgresql.Driver
+dataSource.url=jdbc\:postgresql\://<%= node['streethistory']['db_server']%>\:<%= node['streethistory']['db_server_port']%>
+dataSource.username=<%= node['streethistory']['db_username']%>
+dataSource.password=<%= node['streethistory']['db_password']%>
+dataSource.initialConnections=<%= node['streethistory']['db_initial_conex']%>
+dataSource.maxActiveConnections=<%= node['streethistory']['db_initial_conex']%>
+dataSource.db=<%= node['streethistory']['db_name']%>

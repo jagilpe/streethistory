@@ -1,0 +1,72 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# This is a Vagrant configuration file. It sets up a virtual machine on your local system
+# and deploys all the components of the Street History web application (database,
+# backend and frontend) taking an Ubuntu Precise 32 as base box
+#
+# Copyright 2014, Javier Gil Pereda
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+Vagrant.configure("2") do |config|
+  # Base box
+  config.vm.box = "precise32"
+  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  
+  # Virtual Box options
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 512
+  end
+  
+  # Host configuration
+  config.vm.hostname = "streethistory"
+  
+  # Forwarded ports
+  # Java App Server
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
+  # PostgreSQL
+  config.vm.network :forwarded_port, guest: 5432, host: 5432
+  # Web server
+  config.vm.network :forwarded_port, guest: 80, host: 9080
+  config.vm.network :forwarded_port, guest: 443, host: 8443
+  
+  # Update chef version
+  config.vm.provision :shell, :inline => "apt-get update && apt-get install make && gem install chef --version 11.8.0 --no-rdoc --no-ri --conservative"
+  
+  # Deploy the application with chef solo
+  config.vm.provision :chef_solo do |chef|
+    # Chef data location
+    chef.cookbooks_path = "../../chef-repo/cookbooks"
+    chef.roles_path = "../../chef-repo/roles"
+    chef.data_bags_path = "../../chef-repo/data_bags"
+    
+    # Overridden chef attributes for the machine
+    chef.json = {
+      :streethistory => {
+        :photo_url => "http\://localhost:9080/photos"
+      },
+      :postgresql => {
+        :password => {
+          :postgres => "postgres"
+        }
+      }
+    }
+    
+    # Roles and recipes to apply to the machine
+    chef.add_role "base-ubuntu"
+    chef.add_role "db_server_pg"
+    chef.add_role "backend"
+    chef.add_role "frontend"
+  end
+  
+end

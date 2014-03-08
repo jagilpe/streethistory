@@ -43,3 +43,12 @@ default['streethistory']['backend']['backend_src_dir'] = 'sh-backend'
 default['streethistory']['backend']['artifact_id'] = 'streethistory'
 default['streethistory']['backend']['resources_dir'] = 'src/main/resources'
 default['streethistory']['backend']['commit_ctrl'] = 'bk_commit.deployed'
+
+## Frontend default parameters
+default['streethistory']['frontend']['frontend_src_dir'] = 'sh-frontend'
+default['streethistory']['frontend']['commit_ctrl'] = 'fr_commit.deployed'
+default['streethistory']['frontend']['config_file'] = 'app/scripts/services/config.js'
+default['streethistory']['frontend']['rest_server_name'] = 'localhost'
+default['streethistory']['frontend']['rest_server_port'] = '8080'
+default['streethistory']['frontend']['rest_location'] = 'streethistory/restful'
+default['streethistory']['frontend']['rest_ssl'] = false

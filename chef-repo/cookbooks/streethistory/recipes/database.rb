@@ -34,8 +34,8 @@ end
 ## Setup database
 # Database connection ruby hash for user postgres
 postgresql_connection_info = {
-  :host     => 'localhost',
-  :port     => node['postgresql']['config']['port'],
+  :host     => node['streethistory']['database']['db_server'],
+  :port     => node['streethistory']['database']['db_server_port'],
   :username => 'postgres',
   :password => node['postgresql']['password']['postgres']
 }
@@ -60,28 +60,28 @@ postgresql_database node['streethistory']['db_name'] do
 end
 # Database connection ruby hash for app user
 postgresql_connection_info_sh = {
-  :host     => 'localhost',
-  :port     => node['postgresql']['config']['port'],
+  :host     => node['streethistory']['database']['db_server'],
+  :port     => node['streethistory']['database']['db_server_port'],
   :username => node['streethistory']['db_username'],
   :password => node['streethistory']['db_password']
 }
 # Create database schema
 postgresql_database node['streethistory']['db_name'] do
   exists = <<-EOH
-  su postgres -c "psql -d db_streethistory -c '\\dt' | grep -c sh_user" | grep 0
+  su postgres -c "psql -d #{node['streethistory']['db_name']} -c '\\dt' | grep -c sh_user" | grep 0
   EOH
   connection    postgresql_connection_info_sh
-  sql           { ::File.open('#{source_path}/' + node['streethistory']['db_schema_sql']).read }
+  sql           { ::File.open('#{source_path}/' + node['streethistory']['database']['db_schema_sql']).read }
   action        :query
   only_if exists
 end
 # Populate initial data
 postgresql_database node['streethistory']['db_name'] do
   exists = <<-EOH
-  su postgres -c "psql -d db_streethistory -c 'select title from photo' | grep -c Photo" | grep 0
+  su postgres -c "psql -d #{node['streethistory']['db_name']} -c 'select title from photo' | grep -c Photo" | grep 0
   EOH
   connection    postgresql_connection_info_sh
-  sql           { ::File.open('#{source_path}/' + node['streethistory']['db_data_init_sql']).read }
+  sql           { ::File.open('#{source_path}/' + node['streethistory']['database']['db_data_init_sql']).read }
   action        :query
   only_if exists  
 end

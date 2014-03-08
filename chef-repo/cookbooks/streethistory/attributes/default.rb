@@ -17,21 +17,21 @@
 # limitations under the License.
 #
 
-## Database default parameters
+## Common application parameters
 default['streethistory']['repository'] = 'https://github.com/jagilpe/streethistory'
 default['streethistory']['db_name'] = 'db_streethistory'
 default['streethistory']['db_username'] = 'sh_user'
 default['streethistory']['db_password'] = 'sh_user'
-default['streethistory']['db_schema_sql'] = 'database/sh_create_schema.sql'
-default['streethistory']['db_data_init_sql'] = 'database/sh_load_test_data.sql'
-default['streethistory']['db_server'] = 'localhost'
-default['streethistory']['db_server_port'] = '5432'
-default['streethistory']['db_initial_conex'] = '20'
-default['streethistory']['db_max_conex'] = '30'
 default['streethistory']['app_name'] = 'streethistory'
 default['streethistory']['work_dir'] = '/var/lib/streethistory'
 default['streethistory']['srid'] = '4326'
 default['streethistory']['photo_url'] = 'http\://localhost/photos'
+
+## Database default parameters
+default['streethistory']['database']['db_schema_sql'] = 'database/sh_create_schema.sql'
+default['streethistory']['database']['db_data_init_sql'] = 'database/sh_load_test_data.sql'
+default['streethistory']['database']['db_server'] = 'localhost'
+default['streethistory']['database']['db_server_port'] = '5432'
 
 ## Backend default parameters
 default['streethistory']['backend']['app_server'] = 'tomcat7'
@@ -43,6 +43,11 @@ default['streethistory']['backend']['backend_src_dir'] = 'sh-backend'
 default['streethistory']['backend']['artifact_id'] = 'streethistory'
 default['streethistory']['backend']['resources_dir'] = 'src/main/resources'
 default['streethistory']['backend']['commit_ctrl'] = 'bk_commit.deployed'
+default['streethistory']['backend']['db_server'] = 'localhost'
+default['streethistory']['backend']['db_server_port'] = '5432'
+default['streethistory']['backend']['db_initial_conex'] = '20'
+default['streethistory']['backend']['db_max_conex'] = '30'
+
 
 ## Frontend default parameters
 default['streethistory']['frontend']['frontend_src_dir'] = 'sh-frontend'

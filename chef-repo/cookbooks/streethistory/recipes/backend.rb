@@ -49,6 +49,15 @@ template "#{resource_path}/db.properties" do
   mode 0644
   owner "root"
   group "root"
+  variables ({
+    :db_server => node['streethistory']['database']['db_server'],
+    :db_server_port => node['streethistory']['database']['db_server_port'],
+    :db_username => node['streethistory']['db_username'],
+    :db_password => node['streethistory']['db_password'],
+    :db_initial_conex => node['streethistory']['backend']['db_initial_conex'],
+    :db_max_conex => node['streethistory']['backend']['db_max_conex'],
+    :db_name => node['streethistory']['db_name']
+  })
 end
 
 template "#{resource_path}/streethistory.properties" do
@@ -56,6 +65,10 @@ template "#{resource_path}/streethistory.properties" do
   mode 0644
   owner "root"
   group "root"
+  variables ({
+    :srid => node['streethistory']['srid'],
+    :photo_url => node['streethistory']['photo_url']
+  })
 end
 
 ## Build the application

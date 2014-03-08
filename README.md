@@ -42,7 +42,7 @@ sh-backend
 This directory contains the Eclipse project of the Spring backend of the application.
 
 In order to build the application you will need to have the JDK 7 and maven installed in your computer and run
-`maven package`. This will create a war (`streethistory.wr`) that can be used to deploy the app in Java Web 
+`maven package`. This will create a war (`streethistory.war`) that can be used to deploy the app in Java Web 
 Container or App Server with JRE 7 installed. It has been tested in Tomcat 7 and Glassfish 3.0.1
 
 sh-frontend
@@ -65,7 +65,8 @@ Special significance have in this directory:
 #### streethistory cookbook
 
 This cookbook is used to build and deploy the different parts of the application. More information 
-about this cookbook can be found in its [README.md](https://github.com/jagilpe/streethistory/blob/master/chef-repo/README.md)
+about this cookbook can be found in its 
+[README.md](https://github.com/jagilpe/streethistory/blob/master/chef-repo/cookbooks/streethistory/README.md)
 
 #### roles directory
 
@@ -74,10 +75,10 @@ for the purpose of the blog.
 
 In this moment the roles defined are:
 
-* base-ubuntu - role with the common configuration of the ubuntu servers used
-* db_server_pg - role with the configuration of a postgresql database server for the application
-* backend - role with the configuration to set up the backend application in a Tomcat 7
-* frontend - role with the configuration to set up the frontend in a ngix server
+* `base-ubuntu` - role with the common configuration of the ubuntu servers used
+* `db_server_pg` - role with the configuration of a postgresql database server for the application
+* `backend` - role with the configuration to set up the backend application in a Tomcat 7
+* `frontend` - role with the configuration to set up the frontend in a ngix server
 
 vagrant
 -------
@@ -97,3 +98,17 @@ More information about this cookbook can be found in its
 License and Authors
 -------------------
 Authors: Javier Gil Pereda
+
+Copyright (C) 2014 Javier Gil Pereda 
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at 
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and 
+limitations under the License.

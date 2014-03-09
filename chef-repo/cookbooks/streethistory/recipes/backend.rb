@@ -19,6 +19,7 @@
 
 ## Include dependencies
 include_recipe 'git'
+include_recipe 'maven'
 
 ## Parameters definition
 repo_path = "#{Chef::Config[:file_cache_path]}/" + node['streethistory']['app_name']

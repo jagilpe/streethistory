@@ -25,9 +25,9 @@ points of interaction between them.
 
 Basically this application has in this moments:
 
-* A postgresql database with PostGIS extension to manage the geographical data
-* An Spring backend, that exposes a RESTful WS to the possible clients
-* An Angular Frontend, that consumes the RESTful-WS of the backend
+* A [postgresql](http://www.postgresql.org/) database with [PostGIS](http://postgis.net/) extension to manage the geographical data
+* An [Spring](http://spring.io/) backend, that exposes a RESTful WS to the possible clients
+* An [Angular](http://angularjs.org/) Frontend, that consumes the RESTful-WS of the backend
 
 database
 --------
@@ -39,21 +39,23 @@ initial test data. It has also a pgmodeler file with the schema of the database.
 sh-backend
 ----------
 
-This directory contains the Eclipse project of the Spring backend of the application.
+This directory contains the [Eclipse](http://www.eclipse.org/) project of the Spring backend of the application.
 
-In order to build the application you will need to have the JDK 7 and maven installed in your computer and run
+In order to build the application you will need to have the JDK 7 and [Maven](http://maven.apache.org/) installed in your computer and run
 `maven package`. This will create a war (`streethistory.war`) that can be used to deploy the app in Java Web 
-Container or App Server with JRE 7 installed. It has been tested in Tomcat 7 and Glassfish 3.0.1
+Container or App Server with JRE 7 installed. It has been tested in [Tomcat 7](http://tomcat.apache.org/) 
+and [Glassfish 3.0.1](https://glassfish.java.net/)
 
 sh-frontend
 -----------
 
-This directory contains the Yeoman project of the Angular frontend of the application.
+This directory contains the [Yeoman](http://yeoman.io/) project of the frontend of the application 
+based on [Angular](http://angularjs.org/).
 
 chef-repo
 ---------
 
-This directory contains all the cookbooks and roles used to automate the deployment and operation of
+This directory contains all the [Chef](http://www.getchef.com/chef/) cookbooks and roles used to automate the deployment and operation of
 the different components of the application.
 
 Special significance have in this directory:
@@ -78,7 +80,7 @@ In this moment the roles defined are:
 * `base-ubuntu` - role with the common configuration of the ubuntu servers used
 * `db_server_pg` - role with the configuration of a postgresql database server for the application
 * `backend` - role with the configuration to set up the backend application in a Tomcat 7
-* `frontend` - role with the configuration to set up the frontend in a ngix server
+* `frontend` - role with the configuration to set up the frontend in a [ngix](http://nginx.org/) server
 
 vagrant
 -------

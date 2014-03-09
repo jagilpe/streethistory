@@ -1,7 +1,7 @@
 #
 # Role name:: backend
 # 
-# PostgreSQL database server for Street History app
+# Backend server for Street History app
 #
 
 name "backend"

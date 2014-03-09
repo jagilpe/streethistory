@@ -19,10 +19,10 @@
 
 ## Common application parameters
 default['streethistory']['repository'] = 'https://github.com/jagilpe/streethistory'
+default['streethistory']['app_name'] = 'streethistory'
 default['streethistory']['db_name'] = 'db_streethistory'
 default['streethistory']['db_username'] = 'sh_user'
 default['streethistory']['db_password'] = 'sh_user'
-default['streethistory']['app_name'] = 'streethistory'
 default['streethistory']['work_dir'] = '/var/lib/streethistory'
 default['streethistory']['srid'] = '4326'
 default['streethistory']['photo_url'] = 'http\://localhost/photos'
@@ -57,3 +57,5 @@ default['streethistory']['frontend']['rest_server_name'] = 'localhost'
 default['streethistory']['frontend']['rest_server_port'] = '8080'
 default['streethistory']['frontend']['rest_location'] = 'streethistory/restful'
 default['streethistory']['frontend']['rest_ssl'] = false
+default['streethistory']['frontend']['web_server_user'] = "root"
+default['streethistory']['frontend']['web_doc_root'] = "/var/www"

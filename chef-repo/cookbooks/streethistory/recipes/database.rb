@@ -20,6 +20,7 @@
 ## Include prerequisites
 include_recipe 'git'
 include_recipe 'database::postgresql'
+include_recipe 'postgresql::server'
 
 ## Parameters definition
 source_path = '#{Chef::Config[:file_cache_path]}/streethistory'

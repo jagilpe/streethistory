@@ -69,21 +69,6 @@ template "#{config_file}" do
   })
 end
 
-## Install rubygems
-#package "rubygems" do
-#  action :install
-#end
-
-## Install rubygems-update
-#gem_package "rubygems-update" do
-#  action :install
-#end
-
-## Update rubygems
-#execute "gems_update" do
-#  command "sudo update_rubygems"
-#end
-
 ## Install compass
 gem_package "compass" do
   action :install
@@ -103,7 +88,7 @@ execute "frontend_build" do
   git log --format='%H' | head -n1 | grep `cat #{deployed_commit}`
   EOH
   cwd "#{source_path}"
-  command "sudo npm install && sudo bower --allow-root install && grunt build && rsync -a --owner=#{node['nginx']['user']} #{source_path}/dist/ #{node['nginx']['default_root']} && git log --format='%H' | head -n1 > #{deployed_commit}"
+  command "sudo npm install && sudo bower --allow-root install && grunt build && rsync -a --owner=#{node['streethistory']['frontend']['web_server_user']} #{source_path}/dist/ #{node['streethistory']['frontend']['web_doc_root']} && git log --format='%H' | head -n1 > #{deployed_commit}"
   action :run
   not_if app_uptodate 
 end

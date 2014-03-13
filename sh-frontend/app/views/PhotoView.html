@@ -1,3 +1,16 @@
 <div class="modal-body modal-img">
 	<img class="img-responsive" src="{{imageBaseUrl}}{{photo.url}}">
+	<div class="panel panel-default photo-title">
+		<div class="panel-body">
+			<h1 class="photo-header">{{photo.title}}</h1>
+		</div>
+	</div>
+	<div class="photo-desc" ng-init="arrow = 'up'">
+		<button type="button" class="btn btn-default btn-xs photo-btn" ng-click="isCollapsed=! isCollapsed; arrow=(arrow=='up')?'down':'up'">
+			<span class="glyphicon glyphicon-chevron-{{arrow}}"></span>
+		</button>
+		<div collapse="! isCollapsed">
+			<div class="well well-lg photo-desc-box">{{photo.description}}</div> 
+		</div>
+	</div>
 </div>

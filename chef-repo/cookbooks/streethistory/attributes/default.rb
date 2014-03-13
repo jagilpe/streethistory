@@ -59,3 +59,4 @@ default['streethistory']['frontend']['rest_location'] = 'streethistory/restful'
 default['streethistory']['frontend']['rest_ssl'] = false
 default['streethistory']['frontend']['web_server_user'] = "root"
 default['streethistory']['frontend']['web_doc_root'] = "/var/www"
+default['streethistory']['frontend']['photo_url'] = "photos/"

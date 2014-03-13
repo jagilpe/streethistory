@@ -225,59 +225,66 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['frontend_src_dir']</tt></td>
+    <td><tt>['streethistory']['frontend']['frontend_src_dir']</tt></td>
     <td>String</td>
     <td>source directory of the frontend application within the repository</td>
     <td><tt>sh-frontend</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['commit_ctrl']</tt></td>
+    <td><tt>['streethistory']['frontend']['commit_ctrl']</tt></td>
     <td>String</td>
     <td>name of to file to store the latest commit of the frontend successfully deployed on the server</td>
     <td><tt>fr_commit.deployed</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['config_file']</tt></td>
+    <td><tt>['streethistory']['frontend']['config_file']</tt></td>
     <td>String</td>
     <td>path to the configuration file of the frontend application</td>
     <td><tt>app/scripts/services/config.js</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['rest_server_name']</tt></td>
+    <td><tt>['streethistory']['frontend']['rest_server_name']</tt></td>
     <td>String</td>
     <td>fqdn or ip of the backend server the user will connect to</td>
     <td><tt>localhost</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['rest_server_port']</tt></td>
+    <td><tt>['streethistory']['frontend']['rest_server_port']</tt></td>
     <td>String</td>
     <td>tcp port of the backend server</td>
     <td><tt>8080</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['rest_location']</tt></td>
+    <td><tt>['streethistory']['frontend']['rest_location']</tt></td>
     <td>String</td>
     <td>path to access the restful web services</td>
     <td><tt>streethistory/restful</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['rest_ssl']</tt></td>
+    <td><tt>['streethistory']['frontend']['rest_ssl']</tt></td>
     <td>Boolean</td>
     <td>whether or not will ssl used to connect to the backend server</td>
     <td><tt>false</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['web_server_user']</tt></td>
+    <td><tt>['streethistory']['frontend']['web_server_user']</tt></td>
     <td>String</td>
     <td>user owner of the deployed files</td>
     <td><tt>root</tt></td>
   </tr>
   <tr>
-    <td><tt>['streethistory']['backend']['web_doc_root']</tt></td>
+    <td><tt>['streethistory']['frontend']['web_doc_root']</tt></td>
     <td>String</td>
     <td>path to the www files</td>
     <td><tt>/var/www</tt></td>
   </tr>
+  <tr>
+    <td><tt>['streethistory']['frontend']['photo_url']</tt></td>
+    <td>String</td>
+    <td>base url for the photo files</td>
+    <td><tt>photos/</tt></td>
+  </tr>
+	
 </table>
 
 Recipes

@@ -52,6 +52,8 @@ directory node['nginx']['default_root'] do
   action :create
 end
 
+## 
+
 ## Clone git repository
 git "#{repo_path}" do
   repository node['streethistory']['repository']
@@ -65,7 +67,8 @@ template "#{config_file}" do
   group "root"
   mode 0644
   variables ({
-    :restful_url => "#{rest_url}"
+    :restful_url => "#{rest_url}",
+    :photo_url => "#{node['streethistory']['frontend']['photo_url']}"
   })
 end
 

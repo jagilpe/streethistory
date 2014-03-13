@@ -2,8 +2,8 @@
 
 angular.module('shFrontendApp')
 
-.controller('MainCtrl', ['$scope', 'photos',
-	function($scope, photos) {
+.controller('MainCtrl', ['$scope', '$modal', 'photos',
+	function($scope, $modal, photos) {
 		// map initialization
 		$scope.map = {
 			center: {
@@ -22,6 +22,29 @@ angular.module('shFrontendApp')
 		
 		// Photos data loading
 		$scope.photos = photos;
+		
+		// Open the modal image viewer
+		var openPhoto = function(photo) {
+			
+			var modalInstance = $modal.open({
+				templateUrl: 'views/PhotoView.html',
+				controller: ModalPhotoCtrl,
+				resolve: {
+					photo: function() {
+						return photo;
+					}
+				}
+			});
+		};
+		$scope.openPhoto = openPhoto;
 	}
-]);
+])
 
+var ModalPhotoCtrl = function($scope, $modalInstance, photo, imageBaseUrl) {
+	
+	$scope.photo = photo;
+	$scope.imageBaseUrl = imageBaseUrl;
+	
+};
+
+ModalPhotoCtrl['$inject'] = ['$scope', '$modalInstance', 'photo', 'imageBaseUrl'];

@@ -6,6 +6,7 @@
 		 draggable="true"
 		 options="map.options"
 		>
-		<markers models="photos" coords="'coordinates'" doCluster="true" />
+		
+		<marker ng-repeat="photo in photos" coords="photo.coordinates" click="openPhoto(photo)">
 	</google-map>
 </div>

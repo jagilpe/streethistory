@@ -24,7 +24,8 @@ angular.module('shFrontendApp')
 		$scope.photos = photos;
 		
 		// Open the modal image viewer
-		$scope.openPhoto = function(photo) {
+		var openPhoto = function(photo) {
+			
 			var modalInstance = $modal.open({
 				templateUrl: 'views/PhotoView.html',
 				controller: ModalPhotoCtrl,
@@ -35,12 +36,15 @@ angular.module('shFrontendApp')
 				}
 			});
 		};
+		$scope.openPhoto = openPhoto;
 	}
-]);
+])
 
 var ModalPhotoCtrl = function($scope, $modalInstance, photo, imageBaseUrl) {
+	
 	$scope.photo = photo;
 	$scope.imageBaseUrl = imageBaseUrl;
 	
 };
 
+ModalPhotoCtrl['$inject'] = ['$scope', '$modalInstance', 'photo', 'imageBaseUrl'];

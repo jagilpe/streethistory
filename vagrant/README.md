@@ -62,7 +62,9 @@ go to [http://localhost:9080/](http://localhost:9080/)
 
 ###Platform
 
-This box has been tested in Mac OSX 10.8.5 Mountain Lion.
+This box has been tested in:
+* Mac OSX 10.8.5 Mountain Lion.
+* Windows 7.
 
 database
 --------
